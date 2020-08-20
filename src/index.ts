@@ -1,8 +1,8 @@
 // cache
-import { Cache } from './Cache';
+import { Cache } from "./Cache";
 
 // types
-import { MicroMemoize } from './types';
+import { MicroMemoize } from "./types";
 
 // utils
 import {
@@ -11,18 +11,18 @@ import {
   isMemoized,
   isSameValueZero,
   mergeOptions,
-} from './utils';
+} from "./utils";
 
 function createMemoizedFunction<Fn extends Function>(
   fn: Fn | MicroMemoize.Memoized<Fn>,
-  options: MicroMemoize.Options = {},
+  options: MicroMemoize.Options = {}
 ): MicroMemoize.Memoized<Fn> {
   if (isMemoized(fn)) {
     return createMemoizedFunction(fn.fn, mergeOptions(fn.options, options));
   }
 
-  if (typeof fn !== 'function') {
-    throw new TypeError('You must pass a function to `memoize`.');
+  if (typeof fn !== "function") {
+    throw new TypeError("You must pass a function to `memoize`.");
   }
 
   const {
@@ -47,7 +47,7 @@ function createMemoizedFunction<Fn extends Function>(
       onCacheHit,
       transformKey,
     },
-    getCustomOptions(options),
+    getCustomOptions(options)
   );
 
   const cache = new Cache(normalizedOptions);
@@ -81,6 +81,7 @@ function createMemoizedFunction<Fn extends Function>(
           cache,
           normalizedOptions,
           memoized,
+          key
         );
       }
 
@@ -92,6 +93,7 @@ function createMemoizedFunction<Fn extends Function>(
             cache,
             normalizedOptions,
             memoized,
+            key
           );
         }
       }
@@ -112,6 +114,7 @@ function createMemoizedFunction<Fn extends Function>(
           cache,
           normalizedOptions,
           memoized,
+          newKey
         );
       }
 
@@ -120,6 +123,7 @@ function createMemoizedFunction<Fn extends Function>(
           cache,
           normalizedOptions,
           memoized,
+          newKey
         );
       }
     }

@@ -9,7 +9,7 @@ export declare namespace MicroMemoize {
 
   export type RawKey = Key | IArguments;
 
-  export type Cache = import('./Cache').Cache;
+  export type Cache = import("./Cache").Cache;
 
   export type EqualityComparator = (object1: any, object2: any) => boolean;
 
@@ -19,6 +19,7 @@ export declare namespace MicroMemoize {
     cache: Cache,
     options: NormalizedOptions,
     memoized: Function,
+    key: RawKey
   ) => void;
 
   export type KeyTransformer = (args: Key) => Key;
